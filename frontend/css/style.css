@@ -1,0 +1,173 @@
+@charset "ISO-8859-1";
+
+#maindiv{
+  height: 100vh;
+  background-image: url("../assest/Adminuser.jpg");
+  background-size: cover;
+}
+#admin {
+  border: 2px solid black;
+  padding: 10px;
+  text-align: center;
+  margin-top: 17%;
+  border-radius: 10px;
+}
+#admin:hover{
+  transform:scale(1.2);
+  box-shadow: 2px 2px 10px 2px rgb(0, 8, 255);
+}
+#user {
+  border: 2px solid black;
+  padding: 10px;
+  text-align: center;
+  margin-top: 17%;
+  border-radius: 10px;
+}
+#user:hover{
+  transform:scale(1.2);
+  box-shadow: 2px 2px 10px 2px rgb(0, 8, 255);
+}
+#adminuser{
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+}
+
+/*Admin login*/
+
+#adminmain {
+  display: flex;
+  justify-content: center;
+  border: 2px solid black;
+  height: 100vh;
+  background-image: url("../assest/travel.jpg");
+  background-size: cover;
+}
+
+#adminlogin {
+  display: table;
+  font-weight: bolder;
+}
+#adminlogin p {
+  display: table-row;
+}
+#adminlogin label {
+  display: table-cell;
+}
+#adminlogin input {
+  display: table-cell;
+}
+#adminlogindiv {
+  border: 1px solid black;
+  border-radius: 10px;
+  align-content: center;
+  height: 53%;
+  margin-top: 12%;
+  padding: 10px;
+}
+#adminlogindiv h3 {
+  text-align: center;
+}
+
+#adminsubmit1 {
+  margin-left: 90%;
+}
+#adminsubmit2 {
+  margin-left: 50%;
+}
+
+#adminregister {
+  display: table;
+  font-weight: bolder;
+  display: none;
+}
+#adminregister p {
+  display: table-row;
+}
+#adminregister label {
+  display: table-cell;
+}
+#adminregister input {
+  display: table-cell;
+}
+#adminregisterdiv {
+  border: 1px solid black;
+  border-radius: 10px;
+  align-content: center;
+  height: 53%;
+  margin-top: 12%;
+  padding: 10px;
+}
+#adminregisterdiv h3 {
+  text-align: center;
+}
+
+/*user login*/
+
+#usermain {
+  display: flex;
+  justify-content: center;
+  border: 2px solid black;
+  border-radius:10px;
+  height: 100vh;
+  background-image: url("../assest/traveluser.jpg");
+  background-size: cover;
+}
+
+#userlogin {
+  display: table;
+  font-weight: bolder;
+}
+#userlogin p {
+  display: table-row;
+}
+#userlogin label {
+  display: table-cell;
+}
+#userlogin input {
+  display: table-cell;
+}
+#userlogindiv {
+  border: 1px solid black;
+  border-radius: 10px;
+  align-content: center;
+  height: 53%;
+  margin-top: 12%;
+  padding: 10px;
+}
+#userlogindiv h3 {
+  text-align: center;
+}
+
+#usersubmit1 {
+  margin-left: 90%;
+}
+#usersubmit2 {
+  margin-left: 50%;
+}
+
+#userregister {
+  display: table;
+  font-weight: bolder;
+  display: none;
+}
+#userregister p {
+  display: table-row;
+}
+#userregister label {
+  display: table-cell;
+}
+#userregister input {
+  display: table-cell;
+}
+#userregisterdiv {
+  border: 1px solid black;
+  border-radius: 10px;
+  align-content: center;
+  height: 53%;
+  margin-top: 12%;
+  padding: 10px;
+}
+#userregisterdiv h3 {
+  text-align: center;
+}

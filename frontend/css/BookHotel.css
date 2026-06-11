@@ -1,0 +1,73 @@
+@charset "ISO-8859-1";
+header {
+    border: 2px solid black;
+    display: flex;
+    gap: 40px;
+    justify-content: space-around;
+    background-color: aliceblue;
+    position: sticky;
+    top: 0px;
+  }
+  #title {
+    border: 5px double black;
+    border-radius: 10px;
+    padding: 5px;
+    margin-left: -10px;
+    background-color: gold;
+  }
+  #nav {
+    word-spacing: 60px;
+    font-size: larger;
+    margin-top: 40px;
+    margin-left: -80px;
+  }
+  #nav a {
+    text-decoration: none;
+    padding: 10px;
+    color: black;
+    font-family: serif;
+  }
+  #nav a:hover {
+    background-color: yellow;
+  }
+  #back{
+    border: 1px solid black;
+    background-color: beige;
+    padding: 5px;
+    float: left;
+    margin-top: 5%;
+    margin-right: 20%;
+    position: relative;
+    z-index: 1;
+}
+
+#bookform{
+    border: 1px solid black;
+    background-color: beige;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 350px;
+    text-align: justify;
+    justify-content: center;
+    align-items: center;
+    margin-top: -42%;
+    margin-left: 33%;
+    position: relative;
+    z-index: 1;
+}
+form input{
+    padding: 5px;
+    border-radius: 10px;
+}
+#booknow{
+    margin-left: 30%;
+    padding: 10px;
+}
+
+#video1{
+    margin-top: -10%;
+    width: 100%;
+    position: relative;
+    z-index: -1;
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JetSetGo</title>
+<link rel="shortcut icon" href="./assest/travelling.jpg" type="image/x-icon">
+<link rel="stylesheet" href="./css/BookHotel.css">
+</head>
+<body>
+
+    <div>
+        <header>
+            <h1 id="title">JetSetGo</h1>
+            <div id="navigation">
+                <nav id="nav">
+                    <a href="UserHome.html">Home</a>
+                    <a href="usercompany.html">Company</a>
+                    <a href="UserTour.html">TourPackage</a>
+                    <a href="UserHotel.html">Hotels</a>
+                    <a href="UserContact.html">Contact</a>
+                    <a href="#" id="navLogout" style="display:none;" onclick="logout()">Logout</a>
+                    <a href="index.html" id="navLogin">Login|SignUp</a>
+                </nav>
+            </div>
+        </header>
+    </div>
+
+    <div id="backbutton">
+        <a href="UserHotel.html" id="back">Back&gt;&gt;</a>
+    </div>
+
+    <div id="bookingform">
+        <section id="video">
+            <video loop muted autoplay id="video1">
+                <source src="./assest/HotelVideo.mp4">
+            </video>
+        </section>
+        <section id="bookform">
+            <h1>Hotel Booking</h1>
+            <form id="hotelForm" onsubmit="goToConfirm(event)">
+                <label>Booking Person Name :</label>
+                <input type="text" id="bookingName" placeholder="Enter Name"> <br><br>
+                <label>Person Contact Number:</label>
+                <input type="text" id="contactNumber" placeholder="Enter Contact Number"> <br><br>
+                <label>Enter Date:</label>
+                <input type="date" id="bookingDate"> <br><br>
+                <label>Enter Number of Persons:</label>
+                <input type="text" id="numPersons" placeholder="Enter Number of Persons"> <br><br>
+                <input type="submit" value="Next" id="booknow">
+            </form>
+        </section>
+    </div>
+
+    <script>
+        if (localStorage.getItem('userLoggedIn')) {
+            document.getElementById('navLogout').style.display = 'inline';
+            document.getElementById('navLogin').style.display = 'none';
+        }
+        function logout() {
+            localStorage.removeItem('userLoggedIn');
+            localStorage.removeItem('userName');
+            localStorage.removeItem('userEmail');
+            window.location.href = 'index.html';
+        }
+
+        const params = new URLSearchParams(window.location.search);
+        const hotel = params.get('hotel') || '';
+        const price = params.get('price') || '';
+
+        function goToConfirm(e) {
+            e.preventDefault();
+            const name = document.getElementById('bookingName').value;
+            const contact = document.getElementById('contactNumber').value;
+            const date = document.getElementById('bookingDate').value;
+            const persons = document.getElementById('numPersons').value;
+            window.location.href = `ConfirmBooking.html?hotel=${encodeURIComponent(hotel)}&price=${encodeURIComponent(price)}&name=${encodeURIComponent(name)}&contactnumber=${encodeURIComponent(contact)}&bookingdate=${encodeURIComponent(date)}&numberofpersons=${encodeURIComponent(persons)}`;
+        }
+    </script>
+</body>
+</html>

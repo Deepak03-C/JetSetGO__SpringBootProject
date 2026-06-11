@@ -1,0 +1,46 @@
+@charset "ISO-8859-1";
+header {
+  border: 2px solid black;
+  display: flex;
+  gap: 40px;
+  justify-content: space-around;
+  background-color: aliceblue;
+  position: sticky;
+  top: 0px;
+}
+#title {
+  border: 5px double black;
+  border-radius: 10px;
+  padding: 5px;
+  margin-left: -10px;
+  background-color: gold;
+}
+#nav {
+  word-spacing: 60px;
+  font-size: larger;
+  margin-top: 40px;
+  margin-left: -80px;
+}
+#nav a {
+  text-decoration: none;
+  padding: 10px;
+  color: black;
+  font-family: serif;
+}
+#nav a:hover {
+  background-color: yellow;
+}
+
+#bannercontent1 {
+  margin-top: -40%;
+  text-align: center;
+  font-size: 70px;
+  color: white;
+}
+#bannercontent2 {
+  color: white;
+  text-align: center;
+  font-size: 30px;
+  justify-content: center;
+  font-family: "Courier New", Courier, monospace;
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JetSetGo</title>
+<link rel="shortcut icon" href="./assest/travelling.jpg" type="image/x-icon">
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+    <div id="adminmain">
+        <div id="adminlogindiv">
+            <h3>Admin Login</h3>
+            <form id="adminlogin" onsubmit="handleLogin(event)">
+                <p>
+                    <label>Admin Email</label>
+                    <input type="text" name="adminemail" id="loginEmail" required>
+                </p>
+                <br>
+                <p>
+                    <label>Admin Password</label>
+                    <input type="password" name="adminpassword" id="loginPassword" required>
+                </p>
+                <br>
+                <p id="adminmsg" style="color:red;"></p>
+                <input type="submit" id="adminsubmit1">
+            </form>
+        </div>
+
+        <div id="adminregisterdiv">
+            <h3>Admin Register</h3>
+            <a href="#" id="notaadmin">Not an admin!! Register!!!</a>
+            <form id="adminregister" onsubmit="handleRegister(event)">
+                <p>
+                    <label>Admin Id</label>
+                    <input type="number" name="radminid" id="adminid" required>
+                </p>
+                <br>
+                <p>
+                    <label>Admin Name</label>
+                    <input type="text" name="radminname" id="adminname" required>
+                </p>
+                <br>
+                <p>
+                    <label>Admin Email</label>
+                    <input type="email" name="radminemail" id="adminemail" required>
+                </p>
+                <br>
+                <p>
+                    <label>Password</label>
+                    <input type="password" name="radminpassword" id="adminpassword" required>
+                </p>
+                <br>
+                <p>
+                    <label>Confirm Password</label>
+                    <input type="password" name="radminconfirmpassword" id="adminconfirmpassword" required>
+                </p>
+                <br>
+                <span id="adminspan2" style="color:red;"></span>
+                <br>
+                <input type="submit" id="adminsubmit2">
+            </form>
+        </div>
+    </div>
+
+    <script src="./js/api.js"></script>
+    <script src="./js/adminscript.js"></script>
+    <script>
+        async function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const res = await apiPost('/auth/admin/login', { adminEmail: email, adminPassword: password });
+            if (res.status === 'success') {
+                localStorage.setItem('adminLoggedIn', 'true');
+                localStorage.setItem('adminName', res.adminName);
+                localStorage.setItem('adminEmail', res.adminEmail);
+                window.location.href = 'AdminHome.html';
+            } else {
+                document.getElementById('adminmsg').textContent = res.message;
+            }
+        }
+
+        async function handleRegister(e) {
+            e.preventDefault();
+            const password = document.getElementById('adminpassword').value;
+            const confirm = document.getElementById('adminconfirmpassword').value;
+            if (password !== confirm) {
+                document.getElementById('adminspan2').textContent = 'Passwords do not match';
+                return;
+            }
+            const res = await apiPost('/auth/admin/register', {
+                adminId: document.getElementById('adminid').value,
+                adminName: document.getElementById('adminname').value,
+                adminEmail: document.getElementById('adminemail').value,
+                adminPassword: password,
+                adminConfirmPassword: confirm
+            });
+            if (res.status === 'success') {
+                alert('Admin registered successfully! Please login.');
+                window.location.reload();
+            } else {
+                document.getElementById('adminspan2').textContent = res.message;
+            }
+        }
+    </script>
+</body>
+</html>

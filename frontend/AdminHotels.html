@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JetSetGo</title>
+<link rel="shortcut icon" href="./assest/travelling.jpg" type="image/x-icon">
+<link rel="stylesheet" href="./css/AdminHotel.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1 id="title">JetSetGo</h1>
+        <div id="navigation">
+            <nav id="nav">
+                <a href="AdminHome.html">Home</a>
+                <a href="AdminCompany.html">Company</a>
+                <a href="AdminTourPackages.html">TourPackage</a>
+                <a href="AdminHotels.html">Hotels</a>
+                <a href="Contact.html">Contact</a>
+                <a href="#" id="navLogout" style="display:none;" onclick="logout()">Logout</a>
+                <a href="index.html" id="navLogin">Login|SignUp</a>
+            </nav>
+        </div>
+    </header>
+</div>
+
+<div id="container1">
+    <div id="video">
+        <video id="video1" autoplay loop muted>
+            <source src="./assest/TourPackage.mp4">
+        </video>
+    </div>
+
+    <div id="adminhotelform">
+        <h1>Hotel</h1>
+        <p id="addMsg" style="color:green;"></p>
+        <form id="hotelForm" onsubmit="handleAddHotel(event)" enctype="multipart/form-data">
+            <label>Image</label>
+            <input type="file" name="img" id="hotelImg" accept="image/*"> <br><br>
+            <label>Hotel Name</label>
+            <input type="text" name="hotelname" id="hotelname"> <br><br>
+            <label>Price</label>
+            <input type="text" name="price" id="price"> <br><br>
+            <input type="submit" value="Add">
+        </form>
+    </div>
+    <div id="viewa">
+        <a href="ViewAdminHotel.html" id="view">View&gt;&gt;</a>
+    </div>
+</div>
+
+<script src="./js/api.js"></script>
+<script>
+    if (localStorage.getItem('adminLoggedIn')) {
+        document.getElementById('navLogout').style.display = 'inline';
+        document.getElementById('navLogin').style.display = 'none';
+    }
+    function logout() {
+        localStorage.removeItem('adminLoggedIn');
+        localStorage.removeItem('adminName');
+        localStorage.removeItem('adminEmail');
+        window.location.href = 'index.html';
+    }
+
+    async function handleAddHotel(e) {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('img', document.getElementById('hotelImg').files[0]);
+        formData.append('hotelname', document.getElementById('hotelname').value);
+        formData.append('price', document.getElementById('price').value);
+
+        const res = await apiMultipart('/admin/hotels', formData);
+        const msg = document.getElementById('addMsg');
+        if (res.status === 'success') {
+            msg.style.color = 'green';
+            msg.textContent = 'Hotel added successfully!';
+            document.getElementById('hotelForm').reset();
+        } else {
+            msg.style.color = 'red';
+            msg.textContent = res.message || 'Failed to add hotel';
+        }
+    }
+</script>
+</body>
+</html>

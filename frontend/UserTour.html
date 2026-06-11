@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JetSetGo</title>
+<link rel="shortcut icon" href="./assest/travelling.jpg" type="image/x-icon">
+<link rel="stylesheet" href="./css/UserTour.css">
+</head>
+<body>
+    <div>
+        <header>
+            <h1 id="title">JetSetGo</h1>
+            <div id="navigation">
+                <nav id="nav">
+                    <a href="UserHome.html">Home</a>
+                    <a href="usercompany.html">Company</a>
+                    <a href="UserTour.html">TourPackage</a>
+                    <a href="UserHotel.html">Hotels</a>
+                    <a href="UserContact.html">Contact</a>
+                    <a href="#" id="navLogout" style="display:none;" onclick="logout()">Logout</a>
+                    <a href="index.html" id="navLogin">Login|SignUp</a>
+                </nav>
+            </div>
+        </header>
+    </div>
+
+    <div id="cards"></div>
+
+    <script src="./js/api.js"></script>
+    <script>
+        if (localStorage.getItem('userLoggedIn')) {
+            document.getElementById('navLogout').style.display = 'inline';
+            document.getElementById('navLogin').style.display = 'none';
+        }
+        function logout() {
+            localStorage.removeItem('userLoggedIn');
+            localStorage.removeItem('userName');
+            localStorage.removeItem('userEmail');
+            window.location.href = 'index.html';
+        }
+
+        async function loadPackages() {
+            const packages = await apiGet('/packages');
+            const container = document.getElementById('cards');
+            if (!packages || packages.length === 0) {
+                container.innerHTML = '<p style="text-align:center;padding:20px;">No tour packages available.</p>';
+                return;
+            }
+            packages.forEach(pkg => {
+                const section = document.createElement('section');
+                section.className = 'card';
+                section.innerHTML = `
+                    <img src="data:image/jpeg;base64,${pkg.image}" alt="packageimage" class="cardimg">
+                    <p class="place">${pkg.place}</p>
+                    <p class="days">${pkg.days}</p>
+                    <a href="BookPackage.html?place=${encodeURIComponent(pkg.place)}&days=${encodeURIComponent(pkg.days)}">
+                        <input type="submit" value="Book Now" class="booknow">
+                    </a>`;
+                container.appendChild(section);
+            });
+        }
+
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('booking') === 'success') {
+                alert('Tour booked successfully!');
+                window.history.replaceState({}, '', 'UserTour.html');
+            }
+            loadPackages();
+        };
+    </script>
+</body>
+</html>

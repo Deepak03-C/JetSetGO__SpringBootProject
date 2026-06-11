@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JetSetGo</title>
+<link rel="shortcut icon" href="./assest/travelling.jpg" type="image/x-icon">
+<link rel="stylesheet" href="./css/ConfirmBooking.css">
+</head>
+<body>
+
+    <div>
+        <header>
+            <h1 id="title">JetSetGo</h1>
+            <div id="navigation">
+                <nav id="nav">
+                    <a href="UserHome.html">Home</a>
+                    <a href="usercompany.html">Company</a>
+                    <a href="UserTour.html">TourPackage</a>
+                    <a href="UserHotel.html">Hotels</a>
+                    <a href="UserContact.html">Contact</a>
+                    <a href="#" id="navLogout" style="display:none;" onclick="logout()">Logout</a>
+                    <a href="index.html" id="navLogin">Login|SignUp</a>
+                </nav>
+            </div>
+        </header>
+    </div>
+
+    <div id="backbutton">
+        <a href="javascript:history.back()" id="back">Back&gt;&gt;</a>
+    </div>
+
+    <div id="bookingform">
+        <section id="video">
+            <video loop muted autoplay id="video1">
+                <source src="./assest/HotelVideo.mp4">
+            </video>
+        </section>
+        <section id="bookform">
+            <h1>Hotel Booking - Confirm</h1>
+            <form id="confirmForm" onsubmit="handleConfirm(event)">
+                <label>Booking Person Name :</label>
+                <input type="text" id="cfName" readonly> <br><br>
+                <label>Person Contact Number:</label>
+                <input type="text" id="cfContact"> <br><br>
+                <label>Enter Date:</label>
+                <input type="date" id="cfDate"> <br><br>
+                <label>Enter Number of Persons:</label>
+                <input type="text" id="cfPersons"> <br><br>
+                <label>Hotel Name :</label>
+                <input type="text" id="cfHotel" readonly> <br><br>
+                <label>Total Price :</label>
+                <input type="text" id="cfPrice" readonly> <br><br>
+                <p id="confirmMsg" style="color:red;"></p>
+                <input type="submit" value="Book Now" id="booknow">
+            </form>
+        </section>
+    </div>
+
+    <script src="./js/api.js"></script>
+    <script>
+        if (localStorage.getItem('userLoggedIn')) {
+            document.getElementById('navLogout').style.display = 'inline';
+            document.getElementById('navLogin').style.display = 'none';
+        }
+        function logout() {
+            localStorage.removeItem('userLoggedIn');
+            localStorage.removeItem('userName');
+            localStorage.removeItem('userEmail');
+            window.location.href = 'index.html';
+        }
+
+        const params = new URLSearchParams(window.location.search);
+        const hotel = params.get('hotel') || '';
+        const priceStr = params.get('price') || '0';
+        const name = params.get('name') || '';
+        const contact = params.get('contactnumber') || '';
+        const date = params.get('bookingdate') || '';
+        const persons = parseInt(params.get('numberofpersons') || '1');
+
+        const pricePerPerson = parseFloat(priceStr.replace(/[^0-9.]/g, '')) || 0;
+        const totalPrice = pricePerPerson * persons;
+
+        document.getElementById('cfName').value = name;
+        document.getElementById('cfContact').value = contact;
+        document.getElementById('cfDate').value = date;
+        document.getElementById('cfPersons').value = persons;
+        document.getElementById('cfHotel').value = hotel;
+        document.getElementById('cfPrice').value = totalPrice.toFixed(2);
+
+        async function handleConfirm(e) {
+            e.preventDefault();
+            const body = {
+                name: document.getElementById('cfName').value,
+                contactnumber: document.getElementById('cfContact').value,
+                bookingdate: document.getElementById('cfDate').value,
+                numberofpersons: document.getElementById('cfPersons').value,
+                hotel: document.getElementById('cfHotel').value,
+                price: document.getElementById('cfPrice').value
+            };
+            const res = await apiPost('/bookings/hotel', body);
+            if (res.status === 'success') {
+                window.location.href = 'UserHotel.html?booking=success';
+            } else {
+                document.getElementById('confirmMsg').textContent = res.message || 'Booking failed';
+            }
+        }
+    </script>
+</body>
+</html>

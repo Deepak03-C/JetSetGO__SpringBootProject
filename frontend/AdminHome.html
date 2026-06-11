@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JetSetGo</title>
+<link rel="shortcut icon" href="./assest/travelling.jpg" type="image/x-icon">
+<link rel="stylesheet" href="./css/AdminHome.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1 id="title">JetSetGo</h1>
+            <div id="navigation">
+                <nav id="nav">
+                    <a href="AdminHome.html">Home</a>
+                    <a href="AdminCompany.html">Company</a>
+                    <a href="AdminTourPackages.html">TourPackage</a>
+                    <a href="AdminHotels.html">Hotels</a>
+                    <a href="Contact.html">Contact</a>
+                    <a href="#" id="navLogout" style="display:none;" onclick="logout()">Logout</a>
+                    <a href="index.html" id="navLogin">Login|SignUp</a>
+                </nav>
+            </div>
+        </header>
+    </div>
+
+    <div class="container">
+        <div id="#banner">
+            <video id="video1" loop autoplay muted width="100%">
+                <source src="./assest/travelvideo1.mp4">
+            </video>
+            <p id="bannercontent1">Wanderlust and adventures await.</p>
+            <p id="bannercontent2">Embark on your next adventure with us! Discover breathtaking destinations, unforgettable experiences, and seamless journeys tailored just for you.</p>
+        </div>
+    </div>
+
+    <script>
+        if (localStorage.getItem('adminLoggedIn')) {
+            document.getElementById('navLogout').style.display = 'inline';
+            document.getElementById('navLogin').style.display = 'none';
+        }
+        function logout() {
+            localStorage.removeItem('adminLoggedIn');
+            localStorage.removeItem('adminName');
+            localStorage.removeItem('adminEmail');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

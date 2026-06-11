@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JetSetGo</title>
+<link rel="shortcut icon" href="./assest/travelling.jpg" type="image/x-icon">
+<link rel="stylesheet" href="./css/ViewAdminHotel.css">
+</head>
+<body>
+    <header>
+        <h1 id="title">JetSetGo</h1>
+        <div id="navigation">
+            <nav id="nav">
+                <a href="AdminHome.html">Home</a>
+                <a href="AdminCompany.html">Company</a>
+                <a href="AdminTourPackages.html">TourPackage</a>
+                <a href="AdminHotels.html">Hotels</a>
+                <a href="Contact.html">Contact</a>
+                <a href="#" id="navLogout" style="display:none;" onclick="logout()">Logout</a>
+                <a href="index.html" id="navLogin">Login|SignUp</a>
+            </nav>
+        </div>
+    </header>
+
+    <div id="backbutton">
+        <a href="AdminHotels.html" id="back">Back&gt;&gt;</a>
+    </div>
+
+    <div id="cards"></div>
+
+    <script src="./js/api.js"></script>
+    <script>
+        if (localStorage.getItem('adminLoggedIn')) {
+            document.getElementById('navLogout').style.display = 'inline';
+            document.getElementById('navLogin').style.display = 'none';
+        }
+        function logout() {
+            localStorage.removeItem('adminLoggedIn');
+            localStorage.removeItem('adminName');
+            localStorage.removeItem('adminEmail');
+            window.location.href = 'index.html';
+        }
+
+        async function loadHotels() {
+            const hotels = await apiGet('/hotels');
+            const container = document.getElementById('cards');
+            if (!hotels || hotels.length === 0) {
+                container.innerHTML = '<p style="text-align:center;padding:20px;">No hotels found.</p>';
+                return;
+            }
+            hotels.forEach(hotel => {
+                const section = document.createElement('section');
+                section.className = 'card';
+                section.innerHTML = `
+                    <img src="data:image/jpeg;base64,${hotel.image}" alt="hotelimage" class="cardimg">
+                    <p class="place">${hotel.hotelName}</p>
+                    <p class="days">${hotel.hotelPrice}</p>`;
+                container.appendChild(section);
+            });
+        }
+
+        loadHotels();
+    </script>
+</body>
+</html>

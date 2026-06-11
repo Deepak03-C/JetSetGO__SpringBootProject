@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JetSetGo</title>
+<link rel="shortcut icon" href="./assest/travelling.jpg" type="image/x-icon">
+<link rel="stylesheet" href="./css/UserHotel.css">
+</head>
+<body>
+    <header>
+        <h1 id="title">JetSetGo</h1>
+        <div id="navigation">
+            <nav id="nav">
+                <a href="UserHome.html">Home</a>
+                <a href="usercompany.html">Company</a>
+                <a href="UserTour.html">TourPackage</a>
+                <a href="UserHotel.html">Hotels</a>
+                <a href="UserContact.html">Contact</a>
+                <a href="#" id="navLogout" style="display:none;" onclick="logout()">Logout</a>
+                <a href="index.html" id="navLogin">Login|SignUp</a>
+            </nav>
+        </div>
+    </header>
+
+    <div id="cards"></div>
+
+    <script src="./js/api.js"></script>
+    <script>
+        if (localStorage.getItem('userLoggedIn')) {
+            document.getElementById('navLogout').style.display = 'inline';
+            document.getElementById('navLogin').style.display = 'none';
+        }
+        function logout() {
+            localStorage.removeItem('userLoggedIn');
+            localStorage.removeItem('userName');
+            localStorage.removeItem('userEmail');
+            window.location.href = 'index.html';
+        }
+
+        async function loadHotels() {
+            const hotels = await apiGet('/hotels');
+            const container = document.getElementById('cards');
+            if (!hotels || hotels.length === 0) {
+                container.innerHTML = '<p style="text-align:center;padding:20px;">No hotels available.</p>';
+                return;
+            }
+            hotels.forEach(hotel => {
+                const section = document.createElement('section');
+                section.className = 'card';
+                section.innerHTML = `
+                    <img src="data:image/jpeg;base64,${hotel.image}" alt="hotelimage" class="cardimg">
+                    <p class="hotel">${hotel.hotelName}</p>
+                    <p class="price">${hotel.hotelPrice}</p>
+                    <a href="BookHotel.html?hotel=${encodeURIComponent(hotel.hotelName)}&price=${encodeURIComponent(hotel.hotelPrice)}">
+                        <input type="submit" value="Book Now" class="booknow">
+                    </a>`;
+                container.appendChild(section);
+            });
+        }
+
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('booking') === 'success') {
+                alert('Hotel booked successfully!');
+                window.history.replaceState({}, '', 'UserHotel.html');
+            }
+            loadHotels();
+        };
+    </script>
+</body>
+</html>

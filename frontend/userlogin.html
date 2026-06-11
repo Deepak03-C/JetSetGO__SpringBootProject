@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JetSetGo</title>
+<link rel="shortcut icon" href="./assest/travelling.jpg" type="image/x-icon">
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+    <div id="usermain">
+        <div id="userlogindiv">
+            <h3>User Login</h3>
+            <form id="userlogin" onsubmit="handleLogin(event)">
+                <p>
+                    <label>User Email</label>
+                    <input type="text" name="useremail" id="loginEmail" required>
+                </p>
+                <br>
+                <p>
+                    <label>User Password</label>
+                    <input type="password" name="userpassword" id="loginPassword" required>
+                </p>
+                <br>
+                <p id="userspan1" style="color:red;"></p>
+                <input type="submit" id="usersubmit1">
+            </form>
+        </div>
+
+        <div id="userregisterdiv">
+            <h3>User Register</h3>
+            <a href="#" id="notauser">not a User!! Register!!!</a>
+            <form id="userregister" onsubmit="handleRegister(event)">
+                <p>
+                    <label>User Name</label>
+                    <input type="text" name="rusername" id="username" required>
+                </p>
+                <br>
+                <p>
+                    <label>User Email</label>
+                    <input type="text" name="ruseremail" id="useremail" required>
+                </p>
+                <br>
+                <p>
+                    <label>Password</label>
+                    <input type="password" name="ruserpassword" id="userpassword" required>
+                </p>
+                <br>
+                <p>
+                    <label>Confirm Password</label>
+                    <input type="password" name="ruserconfirmpassword" id="userconfirmpassword" required>
+                </p>
+                <br>
+                <span id="userspan2" style="color:red;"></span>
+                <br>
+                <input type="submit" id="usersubmit2">
+            </form>
+        </div>
+    </div>
+
+    <script src="./js/api.js"></script>
+    <script src="./js/userscript.js"></script>
+    <script>
+        async function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const res = await apiPost('/auth/user/login', { userEmail: email, userPassword: password });
+            if (res.status === 'success') {
+                localStorage.setItem('userLoggedIn', 'true');
+                localStorage.setItem('userName', res.userName);
+                localStorage.setItem('userEmail', res.userEmail);
+                window.location.href = 'UserHome.html';
+            } else {
+                document.getElementById('userspan1').textContent = res.message;
+            }
+        }
+
+        async function handleRegister(e) {
+            e.preventDefault();
+            const password = document.getElementById('userpassword').value;
+            const confirm = document.getElementById('userconfirmpassword').value;
+            if (password !== confirm) {
+                document.getElementById('userspan2').textContent = 'Passwords do not match';
+                return;
+            }
+            const res = await apiPost('/auth/user/register', {
+                userName: document.getElementById('username').value,
+                userEmail: document.getElementById('useremail').value,
+                userPassword: password,
+                userConfirmPassword: confirm
+            });
+            if (res.status === 'success') {
+                alert('Registration successful! Please login.');
+                window.location.reload();
+            } else {
+                document.getElementById('userspan2').textContent = res.message;
+            }
+        }
+    </script>
+</body>
+</html>

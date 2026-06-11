@@ -1,0 +1,207 @@
+@charset "ISO-8859-1";
+header {
+  border: 2px solid black;
+  display: flex;
+  gap: 40px;
+  justify-content: space-around;
+  background-color: aliceblue;
+  position: sticky;
+  top: 0px;
+}
+#title {
+  border: 5px double black;
+  border-radius: 10px;
+  padding: 5px;
+  margin-left: -10px;
+  background-color: gold;
+}
+#nav {
+  word-spacing: 60px;
+  font-size: larger;
+  margin-top: 40px;
+  margin-left: -80px;
+}
+#nav a {
+  text-decoration: none;
+  padding: 10px;
+  color: black;
+  font-family: serif;
+}
+#nav a:hover {
+  background-color: yellow;
+}
+
+#bannercontent1 {
+  margin-top: -40%;
+  text-align: center;
+  font-size: 70px;
+  color: white;
+}
+#bannercontent2 {
+  color: white;
+  text-align: center;
+  font-size: 30px;
+  justify-content: center;
+  font-family: "Courier New", Courier, monospace;
+}
+
+#HomeCard{
+  margin-top: 26%;
+  border: 1px solid black;
+  height: 100vh;
+  padding: 10px;
+  background-image: url(../assest/wooden-bridge.jpg);
+  background-size: cover;
+}
+#HomeCard h1{
+  border: 1px solid black;
+  width: 20%;
+  text-align: center;
+  padding: 10px;
+  background-color: black;
+  color: white;
+}
+
+#card1{
+  border: 2px solid black;
+  border-radius: 20px;
+  height: 36%;
+  width: 30%;
+  text-align: center;
+  margin-left: 10%;
+  margin-top: 40px;
+}
+#card1img img{
+  height: 270px;
+  width: 100%;
+  border-radius: 20px;
+}
+#card1:hover{
+  transform: scale(1.1);
+  transition: all 1s ;
+  box-shadow: 10px 10px 5px 2px black;
+}
+#card1content{
+  margin-top: -45%;
+  color: white;
+  font-size: 30px;
+}
+#card1content a{
+  text-decoration: none;
+  color: white;
+  font-family: sans-serif;
+  font-weight: lighter;
+}
+#card1button{
+  padding: 10px;
+  background-color: gold;
+  border-radius: 10px;
+}
+
+#card2{
+  border: 1px solid black;
+  border-radius:20px;
+  height: 36%;
+  width: 30%;
+  text-align: center;
+  margin-left: 50%;
+  margin-top: -18%;
+}
+#card2img img{
+  height: 270px;
+  width: 100%;
+  border-radius: 20px;
+}
+#card2:hover{
+  transform: scale(1.1);
+  transition: all 1s ;
+  box-shadow: 10px 10px 5px 2px black;
+}
+#card2content{
+  margin-top: -45%;
+  color: white;
+  font-size: 30px;
+}
+#card2content a{
+  text-decoration: none;
+  color: white;
+  font-family: sans-serif;
+  font-weight: lighter;
+}
+#card2button{
+  padding: 10px;
+  background-color: gold;
+  border-radius: 10px;
+}
+
+#card3{
+  border: 1px solid black;
+  border-radius:20px;
+  height: 36%;
+  width: 30%;
+  text-align: center;
+  margin-top: 30px;
+  margin-left: 10%;
+}
+#card3img img{
+  height: 270px;
+  width: 100%;
+  border-radius: 20px;
+}
+#card3:hover{
+  transform: scale(1.1);
+  transition: all 1s ;
+  box-shadow: 10px 10px 5px 2px black;
+}
+#card3content{
+  margin-top: -45%;
+  color: white;
+  font-size: 30px;
+}
+#card3content a{
+  text-decoration: none;
+  color: white;
+  font-family: sans-serif;
+  font-weight: lighter;
+}
+#card3button{
+  padding: 10px;
+  background-color: gold;
+  border-radius: 10px;
+}
+
+#card4{
+  border: 1px solid black;
+  border-radius:20px;
+  height: 36%;
+  width: 30%;
+  text-align: center;
+  margin-left: 50%;
+  margin-top: -18%;
+}
+#card4img img{
+  height: 270px;
+  width: 100%;
+  border-radius: 20px;
+}
+#card4:hover{
+  transform: scale(1.1);
+  transition: all 1s ;
+  box-shadow: 10px 10px 5px 2px black;
+}
+#card4content{
+  margin-top: -45%;
+  color: white;
+  font-size: 30px;
+}
+#card4content a{
+  text-decoration: none;
+  color: white;
+  font-family: sans-serif;
+  font-weight: lighter;
+}
+#card4button{
+  padding: 10px;
+  background-color: gold;
+  border-radius: 10px;
+}

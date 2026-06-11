@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JetSetGo</title>
+<link rel="shortcut icon" href="./assest/travelling.jpg" type="image/x-icon">
+<link rel="stylesheet" href="./css/ViewAdminPackages.css">
+</head>
+<body>
+<div>
+    <header>
+        <h1 id="title">JetSetGo</h1>
+        <div id="navigation">
+            <nav id="nav">
+                <a href="AdminHome.html">Home</a>
+                <a href="AdminCompany.html">Company</a>
+                <a href="AdminTourPackages.html">TourPackage</a>
+                <a href="AdminHotels.html">Hotels</a>
+                <a href="Contact.html">Contact</a>
+                <a href="#" id="navLogout" style="display:none;" onclick="logout()">Logout</a>
+                <a href="index.html" id="navLogin">Login|SignUp</a>
+            </nav>
+        </div>
+    </header>
+</div>
+
+<div id="backbutton">
+    <a href="AdminTourPackages.html" id="back">Back&gt;&gt;</a>
+</div>
+
+<div id="cards"></div>
+
+<script src="./js/api.js"></script>
+<script>
+    if (localStorage.getItem('adminLoggedIn')) {
+        document.getElementById('navLogout').style.display = 'inline';
+        document.getElementById('navLogin').style.display = 'none';
+    }
+    function logout() {
+        localStorage.removeItem('adminLoggedIn');
+        localStorage.removeItem('adminName');
+        localStorage.removeItem('adminEmail');
+        window.location.href = 'index.html';
+    }
+
+    async function loadPackages() {
+        const packages = await apiGet('/packages');
+        const container = document.getElementById('cards');
+        if (!packages || packages.length === 0) {
+            container.innerHTML = '<p style="text-align:center;padding:20px;">No packages found.</p>';
+            return;
+        }
+        packages.forEach(pkg => {
+            const section = document.createElement('section');
+            section.className = 'card';
+            section.innerHTML = `
+                <img src="data:image/jpeg;base64,${pkg.image}" alt="packageimage" class="cardimg">
+                <p class="place">${pkg.place}</p>
+                <p class="days">${pkg.days}</p>`;
+            container.appendChild(section);
+        });
+    }
+
+    loadPackages();
+</script>
+</body>
+</html>

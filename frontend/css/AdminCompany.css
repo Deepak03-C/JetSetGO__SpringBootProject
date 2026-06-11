@@ -1,0 +1,90 @@
+@charset "ISO-8859-1";
+header {
+    border: 2px solid black;
+    display: flex;
+    gap: 40px;
+    justify-content: space-around;
+    background-color: aliceblue;
+    position: sticky;
+    top: 0px;
+  }
+  #title {
+    border: 5px double black;
+    border-radius: 10px;
+    padding: 5px;
+    margin-left: -10px;
+    background-color: gold;
+  }
+  #nav {
+    word-spacing: 60px;
+    font-size: larger;
+    margin-top: 40px;
+    margin-left: -80px;
+  }
+  #nav a {
+    text-decoration: none;
+    padding: 10px;
+    color: black;
+    font-family: serif;
+  }
+  #nav a:hover {
+    background-color: yellow;
+  }
+
+#aboutus{
+  text-align: center;
+}
+
+#aboutus p{
+  text-align: justify;
+  width: 75%;
+  margin-left: 10%;
+  font-family: sans-serif;
+}
+#visionmission{
+  display: flex;
+  width:60%;
+  gap: 60px;
+  justify-content: space-around;
+  margin-left: 17%;
+  font-family: sans-serif;
+}
+#ourmission{
+  text-align: justify;
+  justify-content: center;
+  background-color: cyan;
+  border-radius: 10px;
+  margin-top: 20px;
+  padding: 10px;
+}
+#ourvision{
+  background-color: cyan;
+  border-radius: 10px;
+  margin-top: 20px;
+  padding: 10px;
+}
+#history{
+  text-align: justify;
+  width: 75%;
+  margin-left: 10%;
+  font-family: sans-serif;
+  background-color: floralwhite;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+#history h1{
+  font-family: sans-serif;
+}
+
+#companycontent{
+  padding: 10px;
+  background-color: brown;
+}
+#container1{
+  padding: 10px;
+  background-color: cornflowerblue;
+  border-radius: 10px;
+}
+
+

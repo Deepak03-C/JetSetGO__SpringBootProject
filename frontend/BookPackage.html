@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JetSetGo</title>
+<link rel="shortcut icon" href="./assest/travelling.jpg" type="image/x-icon">
+<link rel="stylesheet" href="./css/BookPackages.css">
+</head>
+<body>
+
+    <div>
+        <header>
+            <h1 id="title">JetSetGo</h1>
+            <div id="navigation">
+                <nav id="nav">
+                    <a href="UserHome.html">Home</a>
+                    <a href="usercompany.html">Company</a>
+                    <a href="UserTour.html">TourPackage</a>
+                    <a href="UserHotel.html">Hotels</a>
+                    <a href="UserContact.html">Contact</a>
+                    <a href="#" id="navLogout" style="display:none;" onclick="logout()">Logout</a>
+                    <a href="index.html" id="navLogin">Login|SignUp</a>
+                </nav>
+            </div>
+        </header>
+    </div>
+
+    <div id="backbutton">
+        <a href="UserTour.html" id="back">Back&gt;&gt;</a>
+    </div>
+
+    <div id="bookingform">
+        <section id="video">
+            <video loop muted autoplay id="video1">
+                <source src="./assest/AirBaloon.mp4">
+            </video>
+        </section>
+        <section id="bookform">
+            <h1>Package Booking</h1>
+            <form id="packageBookingForm" onsubmit="handleBooking(event)">
+                <label>Enter Name :</label>
+                <input type="text" name="name" id="bookingName" placeholder="Enter Name"> <br><br>
+                <label>Enter Contact Number:</label>
+                <input type="text" name="contactnumber" id="contactNumber" placeholder="Enter Contact Number"> <br><br>
+                <label>Enter Journey Date:</label>
+                <input type="date" name="journeydate" id="journeyDate"> <br><br>
+                <label>Enter Number of Persons:</label>
+                <input type="text" name="numberofpersons" id="numPersons" placeholder="Enter Number of Persons"> <br><br>
+                <input type="hidden" id="hiddenPlace">
+                <input type="hidden" id="hiddenDays">
+                <p id="bookingMsg" style="color:red;"></p>
+                <input type="submit" value="Book Now" id="booknow">
+            </form>
+        </section>
+    </div>
+
+    <script src="./js/api.js"></script>
+    <script>
+        if (localStorage.getItem('userLoggedIn')) {
+            document.getElementById('navLogout').style.display = 'inline';
+            document.getElementById('navLogin').style.display = 'none';
+        }
+        function logout() {
+            localStorage.removeItem('userLoggedIn');
+            localStorage.removeItem('userName');
+            localStorage.removeItem('userEmail');
+            window.location.href = 'index.html';
+        }
+
+        const params = new URLSearchParams(window.location.search);
+        document.getElementById('hiddenPlace').value = params.get('place') || '';
+        document.getElementById('hiddenDays').value = params.get('days') || '';
+
+        async function handleBooking(e) {
+            e.preventDefault();
+            const body = {
+                place: document.getElementById('hiddenPlace').value,
+                days: document.getElementById('hiddenDays').value,
+                name: document.getElementById('bookingName').value,
+                contactnumber: document.getElementById('contactNumber').value,
+                journeydate: document.getElementById('journeyDate').value,
+                numberofpersons: document.getElementById('numPersons').value
+            };
+            const res = await apiPost('/bookings/package', body);
+            if (res.status === 'success') {
+                window.location.href = 'UserTour.html?booking=success';
+            } else {
+                document.getElementById('bookingMsg').textContent = res.message || 'Booking failed';
+            }
+        }
+    </script>
+</body>
+</html>
