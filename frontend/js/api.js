@@ -1,4 +1,4 @@
-const API_BASE = 'jetsetgospringbootproject.railway.internal';
+const API_BASE = 'jetsetgospringbootproject.railway.internal/api';
 
 async function apiGet(endpoint) {
     try {
