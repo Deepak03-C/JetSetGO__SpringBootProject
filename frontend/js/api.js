@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:8080/api';
+const API_BASE = 'jetsetgospringbootproject.railway.internal';
 
 async function apiGet(endpoint) {
     try {
